@@ -1,4 +1,4 @@
-import { OllamaEmbeddings } from "langchain/embeddings/ollama";
+import { OllamaEmbeddings } from '@langchain/community/embeddings/ollama';
 
 let Document_Embedding = function(){
     this.embeddings = new OllamaEmbeddings({

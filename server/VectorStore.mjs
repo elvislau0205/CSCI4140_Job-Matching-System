@@ -9,6 +9,7 @@ let Vector_Store = function()
     this.directory = "./FAISS_Vector_Store";
     this.DL = new Document_Loader();
     this.DE = new Document_Embedding();
+    this.FaissStore = null;
 }
 
 Vector_Store.prototype.storePDF = async function(src)
@@ -27,8 +28,10 @@ Vector_Store.prototype.storePDF = async function(src)
     if (fs.existsSync(path)) {
         const mergedVectorStore = await FaissStore.load(path, this.DE.embeddings);
         await mergedVectorStore.save(directory);
+        this.FaissStore = mergedVectorStore;
     }else{
         await vectorStore.save(directory);
+        this.FaissStore = vectorStore;
     }
 
     //faiss.index is the index file
@@ -40,12 +43,13 @@ Vector_Store.prototype.loadVectorStore = async function()
     const directory = this.directory;
     // Load the vector store from the same directory
     const loadedVectorStore = await FaissStore.load(directory, this.DE.embeddings);
+    this.FaissStore = loadedVectorStore;
     return loadedVectorStore;
 }
 
-Vector_Store.prototype.search = async function(keyword, docNum)
+Vector_Store.prototype.search = async function(keyword, docNum = 1)
 {
-    const loadedVectorStore = this.loadVectorStore();
+    const loadedVectorStore = await this.loadVectorStore();
     // vectorStore and loadedVectorStore are identical
     const result = await loadedVectorStore.similaritySearch(keyword, docNum);
     return result;
@@ -53,3 +57,5 @@ Vector_Store.prototype.search = async function(keyword, docNum)
 
 // let vs = new Vector_Store();
 // vs.storePDF(`C:/Users/user/Downloads/Resume.pdf`);
+
+export {Vector_Store}
