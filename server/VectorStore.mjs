@@ -22,10 +22,13 @@ Vector_Store.prototype.storePDF = async function(src)
 
     // Save the vector store to a directory
     const directory = this.directory;
+    if (!fs.existsSync(directory)){
+        fs.mkdirSync(directory);
+    }
 
     // Check if old index file exist
-    const path = path.join(this.directory, 'faiss.index')
-    if (fs.existsSync(path)) {
+    const indexFile = path.join(directory, 'faiss.index');
+    if (fs.existsSync(indexFile)) {
         const mergedVectorStore = await FaissStore.load(path, this.DE.embeddings);
         await mergedVectorStore.save(directory);
         this.FaissStore = mergedVectorStore;

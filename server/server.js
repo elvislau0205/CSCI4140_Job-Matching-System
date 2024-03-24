@@ -37,8 +37,21 @@ async function importAI(){
 
 //#region post
 app.post('/upload', upload.single('file'), async (req, res) => {
-  console.log(req.file.path);
-  (await AI).repsonse('What should a CV include?');
+  (await AI).storeCV(req.file.path);
+  res.send({success:true});
+});
+
+app.post('/match', async (req, res) => {
+  const job = req.body.job || null;
+  if(job)
+    (await AI).jobMatch(job);
+  res.send({success:true});
+});
+
+app.post('/chat', async (req, res) => {
+  const message = req.body.message || null;
+  if(message)
+    (await AI).getTextResponse(message);
   res.send({success:true});
 });
 //#endregion
