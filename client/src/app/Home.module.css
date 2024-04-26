@@ -1,0 +1,15 @@
+.hero_header {
+    @apply text-6xl mx-auto
+}
+
+.feature_cards {
+    @apply flex justify-between px-16 mt-3 gap-4
+}
+
+.feature_card {
+    @apply rounded-xl border-black border-2 w-auto p-3
+}
+
+.card_title {
+    @apply font-semibold text-lg
+}
