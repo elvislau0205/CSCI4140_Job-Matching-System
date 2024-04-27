@@ -1,6 +1,7 @@
 import { FaissStore } from "@langchain/community/vectorstores/faiss";
 import { Document_Loader } from "./DocumentLoader.mjs";
 import { Document_Embedding } from "./DocumentEmbedding.mjs";
+import { Document } from "@langchain/core/documents";
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -12,11 +13,20 @@ let Vector_Store = function()
     this.FaissStore = null;
 }
 
-Vector_Store.prototype.storePDF = async function(src)
+Vector_Store.prototype.loadDocs = async function(src)
 {
     // Create docs with a loader
     const docs = await this.DL.LoadPDFFrom(src);
+    return docs
+}
 
+Vector_Store.prototype.indexing = async function(CV_JSON)
+{
+    
+    const docs = [new Document({
+        pageContent: JSON.stringify(CV_JSON),
+        metadata: { page: 1 },
+    })];
     // Load the docs into the vector store
     const vectorStore = await FaissStore.fromDocuments(docs, this.DE.embeddings);
 
@@ -29,7 +39,7 @@ Vector_Store.prototype.storePDF = async function(src)
     // Check if old index file exist
     const indexFile = path.join(directory, 'faiss.index');
     if (fs.existsSync(indexFile)) {
-        const mergedVectorStore = await FaissStore.load(path, this.DE.embeddings);
+        const mergedVectorStore = await FaissStore.load(directory, this.DE.embeddings);
         await mergedVectorStore.save(directory);
         this.FaissStore = mergedVectorStore;
     }else{

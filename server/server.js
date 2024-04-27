@@ -37,8 +37,8 @@ async function importAI(){
 
 //#region post
 app.post('/upload', upload.single('file'), async (req, res) => {
-  (await AI).storeCV(req.file.path);
-  res.send({success:true});
+  const status = (await AI).storeCV(req.file.path);
+  res.send({status:status});
 });
 
 app.post('/match', async (req, res) => {
@@ -48,6 +48,7 @@ app.post('/match', async (req, res) => {
   res.send({success:true});
 });
 
+//test
 app.post('/chat', async (req, res) => {
   const message = req.body.message || null;
   if(message)
