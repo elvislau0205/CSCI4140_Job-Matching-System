@@ -1,11 +1,11 @@
-import CVForm from "./CVForm"
+import TextInput from '@/components/TextInput';
 import Link from 'next/link';
 
 export default function CVPage() {
     return (
         <div className="page_section">
-            <div>You can upload your resumes here!</div>
-            <CVForm />
+            <div>Search for suitable candidate!</div>
+            <TextInput />
         </div>
     )
 }

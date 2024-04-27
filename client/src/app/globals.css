@@ -8,7 +8,7 @@
 }
 
 .page_section {
-    @apply mt-16 px-12 py-4 w-screen
+    @apply mt-16 px-3 md:px-12 py-4 w-screen
 }
 
 .navbar_container {
@@ -24,11 +24,11 @@
 }
 
 .navbar_link {
-    @apply p-3 hover:text-slate-500
+    @apply p-3 hover:text-slate-500 ml-4
 }
 
 .home_hero_header {
-    @apply text-6xl mx-auto font-bold leading-relaxed text-center text-[#2e3944]
+    @apply text-3xl md:text-3xl lg:text-6xl mx-auto font-bold leading-relaxed text-center text-[#2e3944]
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

@@ -8,7 +8,7 @@ export default function Navbar() {
             <div className="navbar_links">
                 <Link href="/" className="navbar_link">Home</Link>
                 <Link href="/CV" className="navbar_link">Submit CV</Link>
-    
+                <Link href="/search" className="navbar_link">Candidate Search</Link>
             </div>
         </div>
         
