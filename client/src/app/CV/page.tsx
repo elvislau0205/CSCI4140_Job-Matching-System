@@ -1,10 +1,9 @@
 import CVForm from "./CVForm"
-import Link from 'next/link';
+import NavBar from '@/components/Navbar';
 
 export default function CVPage() {
     return (<>
-        <h1>CV page</h1>
-        <Link href="/">Back</Link>
+        <NavBar/>
         <CVForm />
     </>
     )

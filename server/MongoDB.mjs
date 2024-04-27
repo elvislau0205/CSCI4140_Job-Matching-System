@@ -1,19 +1,10 @@
 import mongoose from 'mongoose';
 
-let connectionFactory = async function () {
-  const connectionString = 'mongodb://localhost:27017/JobMatchingSystem';
-  const conn = await mongoose.createConnection(connectionString);
-
-  conn.on('connected', () => console.log('connected'));
-  conn.on('open', () => console.log('open'));
-  conn.on('disconnected', () => console.log('disconnected'));
-  conn.on('reconnected', () => console.log('reconnected'));
-  conn.on('disconnecting', () => console.log('disconnecting'));
-  conn.on('close', () => console.log('close'));
-
-  const Schema = mongoose.Schema;
-
-  const CVSchema = new Schema({
+let mongoDB = function()
+{
+  this.conn = connectionFactory();
+  this.Schema = mongoose.Schema;
+  this.CVSchema = new this.Schema({
     name: String,
     education_institution: String,
     education_degree: String,
@@ -24,17 +15,31 @@ let connectionFactory = async function () {
       description: String
     }],
   });
-
-  const JobSchema = new Schema({
+  this.JobSchema = new this.Schema({
     position_title: String,
     job_description: String
   });
+}
 
-  conn.model('CV', CVSchema);
-  conn.model('Job', JobSchema);
-
-  return conn;
+let connectionFactory = async function () 
+{
+  const connectionString = 'mongodb://localhost:27017/JobMatchingSystem';
+  await mongoose.connect(connectionString)
 };
-connectionFactory();
 
-export {connectionFactory}
+mongoDB.prototype.addCV = async function(CV_JSON)
+{
+  const CV = mongoose.model('CV', this.CVSchema);
+  const newCV = new CV(CV_JSON);
+  newCV
+  .save()
+  .then((savedObject) => {
+    // 上面這個savedObject就是再上兩行的newObject
+    console.log("data saved is " + savedObject); // 成功儲存
+  })
+  .catch((e) => {
+    console.log(e); // 未成功儲存
+  });
+}
+
+export {mongoDB}
