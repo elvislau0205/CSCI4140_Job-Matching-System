@@ -3,8 +3,10 @@ import NavBar from '@/components/Navbar';
 
 export default function CVPage() {
     return (<>
-        <NavBar/>
-        <CVForm />
+        <div className="page_section">
+          <CVForm />  
+        </div>
+        
     </>
     )
 }
