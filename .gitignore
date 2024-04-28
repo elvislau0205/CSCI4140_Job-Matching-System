@@ -2,3 +2,4 @@
 /server/node_modules
 /server/FAISS_Vector_Store
 /server/uploads/*
+.history

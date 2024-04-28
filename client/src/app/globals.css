@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+* {
+    @apply text-black dark:text-white font-poppins
+}
+
+.page_section {
+    @apply mt-16 px-3 md:px-12 py-4 w-screen
+}
+
+.navbar_container {
+    @apply px-4 w-screen fixed top-0 h-16 bg-slate-300 flex z-50;
+}
+
+.navbar_items {
+    @apply flex items-center h-auto
+}
+
+.navbar_links {
+    @apply ml-8
+}
+
+.navbar_link {
+    @apply p-3 hover:text-slate-500 ml-4
+}
+
+.home_hero_header {
+    @apply text-3xl md:text-3xl lg:text-6xl mx-auto font-bold leading-relaxed text-center text-[#2e3944]
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+*::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+* {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.tag_list {
+    @apply flex justify-start gap-2 mt-1.5
+}
+
+.tag_pill {
+    @apply flex px-2 py-1 rounded-full text-xs font-semibold tracking-wide text-slate-500 bg-slate-100
+}

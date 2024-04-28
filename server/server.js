@@ -57,6 +57,11 @@ app.post('/chat', async (req, res) => {
 });
 //#endregion
 
+// test endpoint
+app.get('/test', async (req, res) => {
+  res.send({ message: "Hello World!"});
+})
+
 app.listen(port, function () {
   console.log(`Server listening on port ${port}`);
 });
