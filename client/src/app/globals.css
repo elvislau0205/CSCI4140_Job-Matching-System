@@ -41,3 +41,11 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
+
+.tag_list {
+    @apply flex justify-start gap-2 mt-1.5
+}
+
+.tag_pill {
+    @apply flex px-2 py-1 rounded-full text-xs font-semibold tracking-wide text-slate-500 bg-slate-100
+}
