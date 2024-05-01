@@ -62,6 +62,11 @@ app.get('/test', async (req, res) => {
   res.send({ message: "Hello World!"});
 })
 
+app.get('/CV', async (req, res) => {
+  const CV = await (await AI).DB.getCV({});
+  res.send(CV);
+});
+
 app.listen(port, function () {
   console.log(`Server listening on port ${port}`);
 });

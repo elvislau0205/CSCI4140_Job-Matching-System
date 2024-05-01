@@ -34,12 +34,19 @@ mongoDB.prototype.addCV = async function(CV_JSON)
   newCV
   .save()
   .then((savedObject) => {
-    // 上面這個savedObject就是再上兩行的newObject
-    console.log("data saved is " + savedObject); // 成功儲存
+    console.log("data saved is " + savedObject);
   })
   .catch((e) => {
-    console.log(e); // 未成功儲存
+    console.log(e);
   });
+}
+
+mongoDB.prototype.getCV = async function(filter)
+{
+  const CVM = mongoose.model('CV', this.CVSchema);
+  const CVResult = await CVM.find(filter).exec();
+  //console.log(CVResult);
+  return CVResult;
 }
 
 export {mongoDB}

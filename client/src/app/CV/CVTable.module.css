@@ -1,0 +1,11 @@
+.CVTable{
+    @apply w-full
+}
+
+.CVTable tbody tr:nth-child(odd){
+    @apply bg-white
+}
+
+.CVTable tbody tr:nth-child(even){
+    @apply bg-gray-50
+}

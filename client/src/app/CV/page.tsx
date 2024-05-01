@@ -1,10 +1,12 @@
 import CVForm from "./CVForm"
-import NavBar from '@/components/Navbar';
+import CVTable from "./CVTable"
 
 export default function CVPage() {
     return (<>
         <div className="page_section">
-          <CVForm />  
+          <CVForm />
+            
+          <CVTable />  
         </div>
         
     </>
