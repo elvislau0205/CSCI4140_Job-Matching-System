@@ -37,19 +37,26 @@ async function importAI(){
 
 //#region post
 app.post('/upload', upload.single('file'), async (req, res) => {
+  console.log("invoked /upload")
   const status = (await AI).storeCV(req.file.path);
   res.send({status:status});
 });
 
 app.post('/match', async (req, res) => {
+  console.log("invoked /match")
   const job = req.body.job || null;
-  if(job)
-    (await AI).jobMatch(job);
-  res.send({success:true});
+  if(job){
+    const candidates = await (await AI).jobMatch(job);
+    res.send({success:true, candidates:candidates});
+  }
+  else{
+    res.send({success:false});
+  }
 });
 
 //test
 app.post('/chat', async (req, res) => {
+  console.log("invoked /chat")
   const message = req.body.message || null;
   if(message)
     (await AI).getTextResponse(message);
@@ -63,6 +70,7 @@ app.get('/test', async (req, res) => {
 })
 
 app.get('/CV', async (req, res) => {
+  console.log("invoked /CV")
   const CV = await (await AI).DB.getCV({});
   res.send(CV);
 });

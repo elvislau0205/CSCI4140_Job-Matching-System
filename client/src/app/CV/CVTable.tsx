@@ -29,14 +29,14 @@ export default function CVTable() {
         <tbody>
             {CVList.map(CV => <tr key={CV._id}>
                 <td className='p-3 text-xl text-gray-700'>{CV.name}</td>
-                <td className='p-3 text-sm text-gray-700'>{CV.education_institution}</td>
-                <td className='p-3 text-sm text-gray-700'>{CV.education_degree}</td>
-                <td className='p-3 text-sm text-gray-700'>{CV.work_experience.map(work => 
+                <td className='p-3 text-sm text-gray-700'>{CV.educationInstitution}</td>
+                <td className='p-3 text-sm text-gray-700'>{CV.educationDegree}</td>
+                <td className='p-3 text-sm text-gray-700'>{CV.workExperience.map(work => 
                     <div key={work._id} className='rounded-xl shadow-lg'>
                         <div className='p-5 flex flex-col'>
-                            <div className='text-xl font-medium mt-3 text-gray-700'>{work.company_name || "Unknown company"}</div>
-                            <div className='text-xl font-medium mt-3 text-gray-700'>{work.job_title || "Unknown position"}</div>
-                            <div className='text-xl font-medium mt-3 text-gray-700'>{work.dates_of_employment || "Unknown dates"}</div>
+                            <div className='text-xl font-medium mt-3 text-gray-700'>{work.companyName || "Unknown company"}</div>
+                            <div className='text-xl font-medium mt-3 text-gray-700'>{work.jobTitle || "Unknown position"}</div>
+                            <div className='text-xl font-medium mt-3 text-gray-700'>{work.datesOfEmployment || "Unknown dates"}</div>
                             <div className='text-xl font-medium mt-3 text-gray-700'>{work.description || "Unknown details"}</div>
                         </div>
                     </div>

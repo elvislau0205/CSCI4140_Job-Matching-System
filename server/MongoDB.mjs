@@ -6,24 +6,24 @@ let mongoDB = function()
   this.Schema = mongoose.Schema;
   this.CVSchema = new this.Schema({
     name: String,
-    education_institution: String,
-    education_degree: String,
-    work_experience: [{
-      company_name: String,
-      job_title: String, 
-      occupation_industry: String,
+    educationInstitution: String,
+    educationDegree: String,
+    workExperience: [{
+      companyName: String,
+      jobTitle: String, 
+      occupationIndustry: String,
       seniority: String,
-      dates_of_employment: String, 
+      datesOfEmployment: String, 
       description: String
     }],
     skills: [{
-      skill_name: String,
-      skill_level: String
+      skillName: String,
+      skillLevel: String
     }]
   });
   this.JobSchema = new this.Schema({
-    position_title: String,
-    job_description: String
+    positionTitle: String,
+    jobDescription: String
   });
 }
 

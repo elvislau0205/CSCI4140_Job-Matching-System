@@ -80,10 +80,20 @@ AIService.prototype.parseCV = async function(CV)
 AIService.prototype.jobMatch = async function(job)
 {
   const record = await this.searchCV(job);
-  const CV = record[0].pageContent;
-  const CV_JSON = await this.parseCV(CV);
-  console.log(CV_JSON);
-  return CV_JSON;
+  console.log("record:", record);
+  let results = []
+  for(let i = 0; i < record.length; i++){
+    const candidate = record[i][0].pageContent;
+    const score = record[i][1];
+    const CV_JSON = await this.parseCV(candidate);
+    results.push({
+      candidate: CV_JSON,
+      score: score
+    })
+  }
+  // const CV = record[0].pageContent;
+  // const CV_JSON = await this.parseCV(CV);
+  return results;
 }
 
 AIService.prototype.CVProcessing = async function(src)
@@ -91,7 +101,6 @@ AIService.prototype.CVProcessing = async function(src)
   const record = await this.searchCV(job);
   const CV = record[0].pageContent;
   const CV_JSON = await this.parseCV(CV);
-  console.log(CV_JSON);
   return CV_JSON;
 }
 

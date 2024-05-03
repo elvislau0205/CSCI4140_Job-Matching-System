@@ -40,6 +40,7 @@ Vector_Store.prototype.indexing = async function(CV_JSON)
     const indexFile = path.join(directory, 'faiss.index');
     if (fs.existsSync(indexFile)) {
         const mergedVectorStore = await FaissStore.load(directory, this.DE.embeddings);
+        await mergedVectorStore.mergeFrom(vectorStore);
         await mergedVectorStore.save(directory);
         this.FaissStore = mergedVectorStore;
     }else{
@@ -60,11 +61,11 @@ Vector_Store.prototype.loadVectorStore = async function()
     return loadedVectorStore;
 }
 
-Vector_Store.prototype.search = async function(keyword, docNum = 1)
+Vector_Store.prototype.search = async function(keyword, docNum = 2)
 {
     const loadedVectorStore = await this.loadVectorStore();
     // vectorStore and loadedVectorStore are identical
-    const result = await loadedVectorStore.similaritySearch(keyword, docNum);
+    const result = await loadedVectorStore.similaritySearchWithScore(keyword, docNum);
     return result;
 }
 

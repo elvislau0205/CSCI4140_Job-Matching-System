@@ -7,20 +7,20 @@ import { PromptTemplate } from "@langchain/core/prompts";
 // We can use zod to define a schema for the output using the `fromZodSchema` method of `StructuredOutputParser`.
 const ZodSchema = z.object({
   name: z.string().describe("The name of the candidate."),
-  education_institution: z.string().describe("The name of the education institution of the candidate which he/she earned the highest education degree."),
-  education_degree: z.string().describe("The highest degree earned by the candidate in the education institution."),
-  work_experience: z.array(z.object({
-    company_name: z.string().describe("The company name of the work, ignore if not mentioned."),
-    job_title: z.string().describe("The title of the work."),
-    occupation_industry: z.string().describe("What industry does the job belong to, ignore if not mentioned."),
+  educationInstitution: z.string().describe("The name of the education institution of the candidate which he/she earned the highest education degree."),
+  educationDegree: z.string().describe("The highest degree earned by the candidate in the education institution."),
+  workExperience: z.array(z.object({
+    companyName: z.string().describe("The company name of the work, ignore if not mentioned."),
+    jobTitle: z.string().describe("The title of the work."),
+    occupationIndustry: z.string().describe("What industry does the job belong to, ignore if not mentioned."),
     seniority: z.string().describe("The seniority of the work, ignore if not mentioned. Choose from the following: Junior, Mid-level, Senior, Executive, or Not Applicable."),
-    dates_of_employment: z.string().describe("The start and end date of the work."),
+    datesOfEmployment: z.string().describe("The start and end date of the work."),
     description: z.string().describe("The description of the work, ignore if not mentioned. Make this field brief but precise"),
   }))
   .describe("The past work experience of the candidate, only include the company name, job title, dates of employment, occupation industry, seniority and a brief description of the job."),
   skills: z.array(z.object({
-    skill_name: z.string().describe("The name of the skill."),
-    skill_level: z.string().describe("The level of the skill. You may based the level on the amount of projects or jobs the candidate had in the past."),
+    skillName: z.string().describe("The name of the skill."),
+    skillLevel: z.string().describe("The level of the skill. You may based the level on the amount of projects or jobs the candidate had in the past."),
   }))
   .describe("The skills of the candidate, only include the name of the skill, and the level of the skill. Ignore if not mentioned."),
 })
