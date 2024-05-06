@@ -61,7 +61,7 @@ Vector_Store.prototype.loadVectorStore = async function()
     return loadedVectorStore;
 }
 
-Vector_Store.prototype.search = async function(keyword, docNum = 2)
+Vector_Store.prototype.search = async function(keyword, docNum = 5)
 {
     const loadedVectorStore = await this.loadVectorStore();
     // vectorStore and loadedVectorStore are identical

@@ -16,10 +16,7 @@ let mongoDB = function()
       datesOfEmployment: String, 
       description: String
     }],
-    skills: [{
-      skillName: String,
-      skillLevel: String
-    }]
+    skills: [String]
   });
   this.JobSchema = new this.Schema({
     positionTitle: String,
@@ -29,7 +26,7 @@ let mongoDB = function()
 
 let connectionFactory = async function () 
 {
-  const connectionString = 'mongodb://admin:YPKFeUZ6r0TfCN2R@SG-nickel-feet-3360-62484.servers.mongodirector.com:27017/admin';
+  const connectionString = 'mongodb+srv://thematthewko114:admin123@jobmatchingsystem.b7u0kao.mongodb.net/';
   await mongoose.connect(connectionString)
 };
 

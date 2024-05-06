@@ -19,7 +19,13 @@ AIService.prototype.storeCV = async function(src)
   try
   {
     const docs = await this.VS.loadDocs(src);
+    console.log("docs:", docs);
+    // let CVtext = "";
+    // for(let i = 0; i < docs.length; i++){
+    //   CVtext += docs[i].pageContent;
+    // }
     const CVtext = docs[0].pageContent;
+    console.log("CVtext:", CVtext);
     const CV_JSON = await this.parseCV(CVtext);
     console.log(CV_JSON)
     /*const CV_JSON = {
@@ -74,6 +80,7 @@ AIService.prototype.getTextResponse = async function(user_input)
 AIService.prototype.parseCV = async function(CV)
 {
   const JSON = await this.parser.parse(CV);
+  console.log("JSON:", JSON);
   return JSON;
 }
 
@@ -85,7 +92,8 @@ AIService.prototype.jobMatch = async function(job)
   for(let i = 0; i < record.length; i++){
     const candidate = record[i][0].pageContent;
     const score = record[i][1];
-    const CV_JSON = await this.parseCV(candidate);
+    // const CV_JSON = await this.parseCV(candidate);
+    const CV_JSON = JSON.parse(candidate);
     results.push({
       candidate: CV_JSON,
       score: score

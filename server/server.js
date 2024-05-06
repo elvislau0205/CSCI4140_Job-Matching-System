@@ -38,7 +38,7 @@ async function importAI(){
 //#region post
 app.post('/upload', upload.single('file'), async (req, res) => {
   console.log("invoked /upload")
-  const status = (await AI).storeCV(req.file.path);
+  const status = await (await AI).storeCV(req.file.path);
   res.send({status:status});
 });
 
