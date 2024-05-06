@@ -12,6 +12,7 @@ export default function CVPage() {
     const [seniority, setSalary] = React.useState<string>("mid-level");
     const [tagName, setTagName] = React.useState<string>("");
     const [tags, setTags] = React.useState<string[]>(["html/css", "javascript", "typescript", "react", "angular", "node", "express"]);
+    const [job_description, setJobDescription] = React.useState<string>("");
     const [results, setResults] = React.useState([]);
     function addTag() {
         if(tags.includes(tagName)) return;
@@ -27,6 +28,7 @@ export default function CVPage() {
         if(industry) searchString += "Industry: "+industry+", ";
         if(seniority) searchString += "Seniority: "+seniority+", ";
         if(tags.length) searchString += "Tags: "+tags.join(", ")+" ";
+        if(job_description) searchString += "Job Description: "+job_description;
         fetch("http://localhost:3001/match", {
             method: "POST",
             headers: {
@@ -60,6 +62,7 @@ export default function CVPage() {
             <TextInput value={industry} setValue={setIndustry} onChange={setIndustry} placeholder='Job Industry' className="mt-3" id="Job Industry" />
             <TextInput value={seniority} setValue={setSalary} onChange={setSalary} placeholder='Seniority' className="mt-3" id="Seniority" />
             <TagInput value={tagName} setValue={setTagName} placeholder='Tags to look for' tags={tags} setTags={addTag} removeTag={removeTag} className="mt-3" id="Job Industry" />
+            <TextInput value={job_description} setValue={setJobDescription} onChange={setJobDescription} placeholder='Job Description' className="mt-3" id="jd" />
             <div className={styles.search_button} onClick={()=>searchJob()}>Search</div>
             {
                 results && results.length>0?(
@@ -78,6 +81,7 @@ export default function CVPage() {
                                         <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Past Industries</th>
                                         <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Skills</th>
                                         <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Score</th>
+                                        <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Contact</th>
                                     </tr>
                                   </thead>
                                   <tbody className="divide-y divide-gray-200 dark:divide-neutral-700">
@@ -90,10 +94,11 @@ export default function CVPage() {
                                               <tr key={index}>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">{index+1}</td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">{result.candidate?.name}</td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{removeDuplicates(result.candidate?.workExperience.map((w) => w.jobTitle)).join(",")}</td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{removeDuplicates(result.candidate?.workExperience.map((w) => w.occupationIndustry)).join(",")}</td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{removeDuplicates(result.candidate?.skills.map((w) => w)).join(",")}</td>
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{removeDuplicates(result.candidate?.workExperience.map((w) => w.jobTitle)).join(", ")}</td>
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{removeDuplicates(result.candidate?.workExperience.map((w) => w.occupationIndustry)).join(", ")}</td>
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{removeDuplicates(result.candidate?.skills.map((w) => w)).join(", ")}</td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{result.score}</td>
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">{result.candidate?.contactLink}</td>
                                               </tr>
                                           )
                                       })}

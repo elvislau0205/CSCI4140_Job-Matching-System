@@ -19,7 +19,8 @@ const ZodSchema = z.object({
   }))
   .describe("The past work experience of the candidate, only include the company name, job title, dates of employment, occupation industry, seniority and a brief description of the job."),
   skills: z.array(z.string().describe("The name of the skill. Return a string"))
-  .describe("The skills of the candidate, only include the name of the skill, and the level of the skill. Return an empty array if not mentioned.")
+  .describe("The skills of the candidate, only include the name of the skill, and the level of the skill. Return an empty array if not mentioned."),
+  contactLink: z.string().describe("The contact link of the candidate, ignore if not mentioned. This can be either an email address or a linkedIn URL. Return a string")
 })
 
 let CV_Parser = function (){

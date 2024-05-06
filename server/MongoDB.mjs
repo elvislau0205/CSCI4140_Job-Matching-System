@@ -16,7 +16,8 @@ let mongoDB = function()
       datesOfEmployment: String, 
       description: String
     }],
-    skills: [String]
+    skills: [String],
+    contactLink: String
   });
   this.JobSchema = new this.Schema({
     positionTitle: String,
